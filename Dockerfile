@@ -3,7 +3,8 @@ FROM alpine:3.5
 ENV DB_NAME=hlxce \
     DB_USERNAME=hlxce \
     DB_PASSWORD=hlxce \
-    DB_HOST=db
+    DB_HOST=db \
+    LISTEN_PORT=27500
 
 COPY docker-hlxce-daemon-entrypoint /usr/local/bin/
 
