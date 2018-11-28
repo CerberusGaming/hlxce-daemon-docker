@@ -11,7 +11,7 @@ ENV DB_NAME=hlxce \
 
 COPY docker-hlxce-daemon-entrypoint /usr/local/bin/
 
-WORKDIR /home/hlxce/
+WORKDIR /opt/hlxce/
 
 RUN set -x \
         && runDeps=' \
@@ -32,8 +32,6 @@ RUN set -x \
             git \
         \
         && cpan install Geo::IP::PurePerl \
-        && addgroup -S hlxce \
-        && adduser -S -h /home/hlxce/ -s /bin/bash -g hlxce hlxce \
         && rm -rf /var/cache/apk/* \
         && chmod +x /usr/local/bin/docker-hlxce-daemon-entrypoint \
         && git clone https://bitbucket.org/Maverick_of_UC/hlstatsx-community-edition.git hlstatsx \
@@ -44,9 +42,8 @@ RUN set -x \
         && echo $'15 00 * * * cd /home/hlxce/ && su-exec hlxce ./hlstats-awards.pl >/dev/null 2>&1\n' >> /root/daemon.txt \
         && chmod +x GeoLiteCity/install_binary.sh \
         && ./GeoLiteCity/install_binary.sh \
-        && chown hlxce:hlxce -R . \
-	    && apk add --virtual .httpd-rundeps $runDeps \
-	    && apk del .build-deps
+        && apk add --virtual .httpd-rundeps $runDeps \
+	&& apk del .build-deps
 
 ENTRYPOINT ["docker-hlxce-daemon-entrypoint"]
-CMD ["sh", "-c", "/sbin/su-exec", "hlxce", "/usr/bin/perl", "hlstats.pl", "--configfile=hlstats.conf", "--port=${LISTEN_PORT}"]
+CMD ["sh", "-c", "/usr/bin/perl", "hlstats.pl", "--configfile=hlstats.conf", "--port=${LISTEN_PORT}"]
