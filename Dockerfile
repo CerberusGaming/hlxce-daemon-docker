@@ -38,8 +38,8 @@ RUN set -x \
         && mv hlstatsx/scripts/* . \
         && rm -rf hlstatsx \
         && chmod +x hlstats-awards.pl hlstats.pl hlstats-resolve.pl run_hlstats \
-        && echo $'*/5 * * * * cd /home/hlxce/ && su-exec hlxce ./run_hlstats start >/dev/null 2>&1' >> /root/daemon.txt \
-        && echo $'15 00 * * * cd /home/hlxce/ && su-exec hlxce ./hlstats-awards.pl >/dev/null 2>&1\n' >> /root/daemon.txt \
+        && echo $'*/5 * * * * cd /home/hlxce/ && su-exec hlxce ./run_hlstats start >/dev/null 2>&1' >> /opt/hlxce/daemon.txt \
+        && echo $'15 00 * * * cd /home/hlxce/ && su-exec hlxce ./hlstats-awards.pl >/dev/null 2>&1\n' >> /opt/hlxce/daemon.txt \
         && chmod +x GeoLiteCity/install_binary.sh \
         && ./GeoLiteCity/install_binary.sh \
         && apk add --virtual .httpd-rundeps $runDeps \
