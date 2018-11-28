@@ -1,15 +1,14 @@
 #!/bin/bash
-if [ -z "NO_CONFIG" ] && echo "Need to set STATE" && exit 1; then
-  echo "DBHost \"${DB_HOST}\"" > /home/hlxce/hlstats.conf
-  echo "DBUsername \"${DB_USERNAME}\"" >> /home/hlxce/hlstats.conf
-  echo "DBPassword \"${DB_PASSWORD}\"" >> /home/hlxce/hlstats.conf
-  echo "DBName \"${DB_NAME}\"" >> /home/hlxce/hlstats.conf
-  echo "BindIP \"${LISTEN_IP}\"" >> /home/hlxce/hlstats.conf
-  echo "Port ${LISTEN_PORT}" >> /home/hlxce/hlstats.conf
-  echo "CpanelHack 0">> /home/hlxce/hlstats.conf
-  echo "EventQueueSize ${EVENT_QUEUE}" >> /home/hlxce/hlstats.conf
-  echo "DebugLevel 1" >> /home/hlxce/hlstats.conf
-fi
+echo "DBHost \"${DB_HOST}\"" > /home/hlxce/hlstats.conf
+echo "DBUsername \"${DB_USERNAME}\"" >> /home/hlxce/hlstats.conf
+echo "DBPassword \"${DB_PASSWORD}\"" >> /home/hlxce/hlstats.conf
+echo "DBName \"${DB_NAME}\"" >> /home/hlxce/hlstats.conf
+echo "BindIP \"${LISTEN_IP}\"" >> /home/hlxce/hlstats.conf
+echo "Port ${LISTEN_PORT}" >> /home/hlxce/hlstats.conf
+echo "CpanelHack 0">> /home/hlxce/hlstats.conf
+echo "EventQueueSize ${EVENT_QUEUE}" >> /home/hlxce/hlstats.conf
+echo "DebugLevel 1" >> /home/hlxce/hlstats.conf
+
 crontab /root/daemon.txt
 su-exec hlxce /home/hlxce/run_hlstats start
 crond -l 2 -f
