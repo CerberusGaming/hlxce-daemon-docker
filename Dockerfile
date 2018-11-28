@@ -46,4 +46,4 @@ RUN set -x \
 	&& apk del .build-deps
 
 ENTRYPOINT ["docker-hlxce-daemon-entrypoint"]
-CMD ["sh", "-c", "/usr/bin/perl", "hlstats.pl", "--configfile=hlstats.conf", "--port=${LISTEN_PORT}"]
+CMD ["sh", "-c", "/usr/bin/perl", "hlstats.pl", "--configfile=hlstats.conf", "--port=${LISTEN_PORT}", ">&1"]
