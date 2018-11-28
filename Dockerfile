@@ -48,6 +48,5 @@ RUN set -x \
 	    && apk add --virtual .httpd-rundeps $runDeps \
 	    && apk del .build-deps
 
-EXPOSE 27500/udp
-
 ENTRYPOINT ["docker-hlxce-daemon-entrypoint"]
+CMD ["sh", "-c", "/sbin/su-exec", "hlxce", "/usr/bin/perl", "hlstats.pl", "--configfile=hlstats.conf", "--port=${LISTEN_PORT}"]
